@@ -1,0 +1,6 @@
+<hello name="NGRX"></hello>
+<input type="text" [(ngModel)]="name" placeholder="Enter Name"/>
+<button (click)="addUser()">Add</button>
+<p *ngFor="let user of users$ | async">
+  {{user.name}}
+</p>
