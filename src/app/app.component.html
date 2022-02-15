@@ -47,10 +47,10 @@
   </tr>
 </thead>
 <tbody>
-  <tr *ngFor="let product of employees | async">
-    <td>{{product.firstName}}</td>
-    <td>{{product.lastName}}</td>
-    <td>{{product.email}}</td>
+  <tr *ngFor="let emp of employees | async">
+    <td>{{emp.firstName}}</td>
+    <td>{{emp.lastName}}</td>
+    <td>{{emp.email}}</td>
   </tr>
 </tbody>
 </table>
