@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>User form</h2>
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input
+        [class.is-invalid]="
+          employeeForm.get('name').invalid && employeeForm.get('name').touched
+        "
+        type="text"
+        class="form-control"
+        formControlName="name"
+      />
+      <small
+        [class.d-none]="
+          employeeForm.get('name').valid || employeeForm.get('name').untouched
+        "
+        class="text-danger"
+        >Please enter a valid name</small
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input
+        [class.is-invalid]="
+          employeeForm.get('email').invalid && employeeForm.get('email').touched
+        "
+        type="email"
+        class="form-control"
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">City</label>
+      <input
+        [class.is-invalid]="
+          employeeForm.get('city').invalid && employeeForm.get('city').touched
+        "
+        type="password"
+        class="form-control"
+        formControlName="city"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">State</label>
+      <input
+        [class.is-invalid]="
+          employeeForm.get('state').invalid && employeeForm.get('state').touched
+        "
+        type="text"
+        class="form-control"
+        formControlName="state"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div class="mt-4">
+    {{ employeeForm.value | json }}
+  </div>
+</div>
