@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms'
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { UserModel } from '../../models/user.model';
 
 import * as UserActions from '../../state/input-field/input-field.action';
@@ -18,12 +19,14 @@ export class InputFieldContainer implements OnInit {
     private store: Store<any>
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.userDataForm =  new FormGroup({
       username: new FormControl('')
     });
     this.users$ = this.store.pipe(select('users'));
-    this.users$.subscribe((res) => console.log(res));
+    this.users$.pipe(tap(res => 
+      console.log(res)
+    )).subscribe();
   }
 
   addUser() {
