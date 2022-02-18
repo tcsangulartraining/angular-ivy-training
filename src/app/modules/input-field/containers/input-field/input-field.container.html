@@ -1,6 +1,8 @@
-<hello name="NGRX"></hello>
-<input type="text" [(ngModel)]="name" placeholder="Enter Name"/>
-<button (click)="addUser()">Add</button>
-<p *ngFor="let user of users$ | async">
-  {{user.name}}
-</p>
+<form [formGroup]="userDataForm" >
+  <label for="username">User Name </label>
+	<input id="username" formControlName="username" type="text">
+  <button type="submit" (click)="addUser()">Add</button>
+</form>
+<input-field-component
+  [users]="users$ | async"
+></input-field-component>

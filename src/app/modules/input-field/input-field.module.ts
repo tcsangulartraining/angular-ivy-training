@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 // components
-// import { InputFieldComponent } from './components/input-field/input-field.component';
+import { InputFieldComponent } from './components/input-field/input-field.component';
 
 // containers
 import { InputFieldContainer } from './containers/input-field/input-field.container';
@@ -11,7 +13,7 @@ import { InputFieldContainer } from './containers/input-field/input-field.contai
 // pages
 import { InputFieldLandingPage } from './pages/landing-page/landing.page';
 
-// modules
+// routing
 import { InputFieldRoutingModule } from './routes/input-field-routing.module';
 
 // Reducers
@@ -20,7 +22,7 @@ import { Reducers } from './state/input-field/input-field.reducer';
 @NgModule({
   declarations: [
     // components
-    // InputFieldComponent,
+    InputFieldComponent,
     // containers
     InputFieldContainer,
     // pages
@@ -28,6 +30,9 @@ import { Reducers } from './state/input-field/input-field.reducer';
   ],
   imports: [
     // modules
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     InputFieldRoutingModule,
     // ngrx store
     StoreModule.forRoot({
