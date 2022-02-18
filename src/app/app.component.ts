@@ -3,6 +3,10 @@ import { AppState } from './app.state';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
+import { AuthenticationService } from './_services';
+import { User } from './_models';
 
 @Component({
   selector: 'my-app',
@@ -10,7 +14,7 @@ import { first, Observable } from 'rxjs';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  employees: Observable<Employee[]>;
+  /*  employees: Observable<Employee[]>;
 
   constructor(private store: Store<AppState>) {
     this.employees = this.store.select((state) => state.employee);
@@ -30,5 +34,21 @@ export class AppComponent {
         email: this.model.email
       },
     });
+  } */
+
+  currentUser: User;
+
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    this.authenticationService.currentUser.subscribe(
+      (x) => (this.currentUser = x)
+    );
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }
