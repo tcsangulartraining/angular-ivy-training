@@ -1,4 +1,6 @@
-import { initialState, EmployeeState } from './employee.state';
+import { createReducer, on } from '@ngrx/store';
+import { addEmployee, viewEmployee } from './employee.actions';
+import { initialState } from './employee.state';
 
 export const _employeeReducer = createReducer(
   initialState,
