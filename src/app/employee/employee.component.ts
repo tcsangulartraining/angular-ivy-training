@@ -31,6 +31,6 @@ export class EmployeeComponent implements OnInit {
   onSubmit() {
     this.store.dispatch(addEmployee());
 
-    console.log(this.store.select(viewEmployee));
+    //console.log(this.store.select(viewEmployee));
   }
 }
