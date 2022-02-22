@@ -1,8 +1,16 @@
-import { Employee } from '../../shared/employee';
+import { Employee } from 'src/app/models/employee.model';
+
 
 export interface EmployeeState {
-  employee: Employee[];
+  employees: Employee[];
 }
 export const initialState: EmployeeState = {
-  employee: [],
+  employees: [
+    {
+      name:'vithal',
+      email:'vithalbhovi@gmail.com',
+      city:'Bangalore',
+      state:'Karnataka'
+    }
+  ],
 };

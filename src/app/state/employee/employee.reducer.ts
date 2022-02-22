@@ -1,20 +1,22 @@
 import { createReducer, on } from '@ngrx/store';
-import { addEmployee, viewEmployee } from './employee.actions';
+import { addEmployee } from './employee.actions';
 import { initialState } from './employee.state';
 
 export const _employeeReducer = createReducer(
   initialState,
-  on(addEmployee, (state) => {
+  on(addEmployee, (state, action) => {
+    let employee = {...action.employee}
+    console.log("employeee====>", employee);
     return {
       ...state,
-      employee: state.employee,
+      employees: [...state.employees, employee]
     };
   }),
-  on(viewEmployee, (state) => {
-    return {
-      ...state,
-    };
-  })
+  // on(viewEmployee, (state) => {
+  //   return {
+  //     ...state,
+  //   };
+  // })
 );
 
 export function employeeReducer(state, action) {
