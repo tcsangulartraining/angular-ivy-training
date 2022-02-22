@@ -6,7 +6,7 @@ import {
   Validators,
   MinLengthValidator,
 } from '@angular/forms';
-import { Store } from '@ngrx/store/src';
+import { Store } from '@ngrx/store';
 import { Employee } from '../shared/employee';
 import { addEmployee, viewEmployee } from '../state/employee/employee.actions';
 @Component({

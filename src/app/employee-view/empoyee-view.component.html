@@ -7,11 +7,11 @@
         <th>City</th>
         <th>State</th>
       </tr>
-      <tr>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.city }}</td>
-        <td>{{ employee.state }}</td>
+      <tr *ngFor="let emp in employee">
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.city }}</td>
+        <td>{{ emp.state }}</td>
       </tr>
     </table>
   </div>
