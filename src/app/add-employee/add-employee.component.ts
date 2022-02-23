@@ -28,6 +28,7 @@ export class AddEmployeeComponent implements OnInit {
       return;
     }
     const employee:Employee ={
+      id:this.employeeForm.value.id,
       name: this.employeeForm.value.name,
       email:this.employeeForm.value.email,
       city: this.employeeForm.value.city,

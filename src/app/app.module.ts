@@ -12,6 +12,7 @@ import { HeaderComponent } from './shared/header/header/header.component';
 import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
     }),
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-  declarations: [AppComponent, EmployeeListComponent, HomeComponent, HeaderComponent, AddEmployeeComponent],
+  declarations: [AppComponent, EmployeeListComponent, HomeComponent, HeaderComponent, AddEmployeeComponent, EditEmployeeComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
