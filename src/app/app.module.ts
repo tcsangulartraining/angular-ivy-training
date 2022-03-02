@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
@@ -11,8 +10,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HeaderComponent } from './shared/header/header/header.component';
 import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state';
-import { AddEmployeeComponent } from './add-employee/add-employee.component';
-import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 
 @NgModule({
   imports: [
@@ -20,7 +17,7 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot(appReducer),
+    StoreModule.forRoot({}),
     //StoreModule.forRoot({employees:employeeReducer}),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
@@ -30,7 +27,7 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
     }),
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-  declarations: [AppComponent, EmployeeListComponent, HomeComponent, HeaderComponent, AddEmployeeComponent, EditEmployeeComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

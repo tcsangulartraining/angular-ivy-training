@@ -1,9 +1,9 @@
 <div class="row my-4">
-    <h3>Add Employee</h3>
+    <h3>Update Employee</h3>
     <hr/>
     <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <label class="form-label">Name</label>
+        <label class="form-label" formControlName="name">Name</label>
         <input
           [class.is-invalid]="
           employeeForm.get('name').invalid && employeeForm.get('name').touched
@@ -55,11 +55,9 @@
         />
       </div>
       <div class="my-3">
-        <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Update</button>
+        &nbsp;<button type="button" class="btn btn-danger"  (click)="onCancel()">Cancel</button>
     </div>
     </form>
-    <div class="mt-4">
-      {{ employeeForm.value | json }}
-    </div>
   </div>
   

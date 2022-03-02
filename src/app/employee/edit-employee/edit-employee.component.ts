@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Employee } from '../models/employee.model';
-import { getEmployeeById } from '../state/employee/employee.selector';
-import { AppState } from '../store/app.state';
-import * as selectors from '../state/employee/employee.selector';
+import { Employee } from '../../models/employee.model';
+import { getEmployeeById } from '../../state/employee/employee.selector';
+import { AppState } from '../../store/app.state';
+import * as selectors from '../../state/employee/employee.selector';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {Subscription} from 'rxjs'
-import { updateEmployee } from '../state/employee/employee.actions';
+import { updateEmployee } from '../../state/employee/employee.actions';
 
 @Component({
   selector: 'app-edit-employee',
@@ -54,6 +54,9 @@ export class EditEmployeeComponent implements OnInit, OnDestroy {
     }
     //Dispatch action
     this.store.dispatch(updateEmployee({employee}));
+    this.router.navigate(['employee-list'])
+  }
+  onCancel(){
     this.router.navigate(['employee-list'])
   }
   ngOnDestroy(){

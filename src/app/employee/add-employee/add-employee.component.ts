@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Employee } from '../models/employee.model';
-import { addEmployee } from '../state/employee/employee.actions';
-import { AppState } from '../store/app.state';
+import { Employee } from '../../models/employee.model';
+import { addEmployee } from '../../state/employee/employee.actions';
+import { AppState } from '../../store/app.state';
 
 @Component({
   selector: 'app-add-employee',
@@ -12,7 +13,7 @@ import { AppState } from '../store/app.state';
 })
 export class AddEmployeeComponent implements OnInit {
   employeeForm:FormGroup;
-  constructor(private store:Store<AppState>) { }
+  constructor(private store:Store<AppState>, private router:Router) { }
 
   ngOnInit(): void {
     this.employeeForm = new FormGroup({
@@ -36,5 +37,8 @@ export class AddEmployeeComponent implements OnInit {
     }
     this.store.dispatch(addEmployee({employee}))
     //console.log(this.employeeForm.value);
+  }
+  onCancel(){
+    this.router.navigate(['employee-list'])
   }
 }

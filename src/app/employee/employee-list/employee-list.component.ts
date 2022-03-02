@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.state';
 import {Observable} from 'rxjs';
-import { getEmployees } from '../state/employee/employee.selector';
-import { Employee } from '../models/employee.model';
-import { deleteEmployee } from '../state/employee/employee.actions';
+import { Employee } from '../../models/employee.model';
+import { deleteEmployee } from '../../state/employee/employee.actions';
+import { getEmployees } from '../../state/employee/employee.selector'
+import { AppState } from '../../store/app.state';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
