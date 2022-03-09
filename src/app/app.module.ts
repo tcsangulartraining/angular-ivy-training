@@ -12,6 +12,7 @@ import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state';
 import { EffectsModule } from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
     EffectsModule.forRoot([]),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(appReducer),
     //StoreModule.forRoot({employees:employeeReducer}),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
@@ -31,7 +32,7 @@ import {HttpClientModule} from '@angular/common/http';
     }),
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-  declarations: [AppComponent, HomeComponent, HeaderComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent, LoadingSpinnerComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,10 +1,11 @@
-import { employeeReducer } from '../state/employee/employee.reducer';
-import { EmployeeState } from '../state/employee/employee.state';
+import { SharedReducer } from './shared/shared.reducer';
+import { SHARED_STATE_NAME } from './shared/shared.selector';
+import { SharedState } from './shared/shared.state';
 
 export interface AppState{
-    employees:EmployeeState
+    [SHARED_STATE_NAME]: SharedState
 }
 
 export const appReducer ={
-    Employees:employeeReducer
+    [SHARED_STATE_NAME]:SharedReducer
 }
