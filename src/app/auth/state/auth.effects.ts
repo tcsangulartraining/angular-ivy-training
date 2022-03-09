@@ -15,7 +15,10 @@ export class AuthEffects{
             ofType(loginStart),
             mergeMap((action: { email: string; password: string; })=>this.authService.login(action.email, action.password)
             .pipe(
-                map(data=>{return loginSuccess();})
+                map((data)=>{
+                    const user = this.authService.formatUser(data);
+                    return loginSuccess({user});
+                })
             ))
         )
     )
