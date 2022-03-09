@@ -19,27 +19,33 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { AlertComponent } from './_components/alert.component';
+import { DynamicComponent } from './dynamic/dynamic.component';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ,
-    StoreModule.forRoot({employee: addEmployeeReducer}),
+  imports: [
+    BrowserModule,
+    FormsModule,
+    StoreModule.forRoot({ employee: addEmployeeReducer }),
     ReactiveFormsModule,
     HttpClientModule,
-    appRoutingModule
-
+    appRoutingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
-    fakeBackendProvider
-],
-  declarations: [ AppComponent, HelloComponent,
+    fakeBackendProvider,
+  ],
+  declarations: [
+    AppComponent,
+    HelloComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    AlertComponent ],
-  bootstrap:    [ AppComponent ]
+    AlertComponent,
+    DynamicComponent,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,17 @@
+<p>Dynamic Component</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>First Name</td>
+      <td>Last Name</td>
+      <td>Email</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employees | async">
+      <td>{{ emp.firstName }}</td>
+      <td>{{ emp.lastName }}</td>
+      <td>{{ emp.email }}</td>
+    </tr>
+  </tbody>
+</table>

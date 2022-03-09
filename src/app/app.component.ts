@@ -1,6 +1,10 @@
 import { Employee } from './Employee/employee.model';
 import { AppState } from './app.state';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,
+  ComponentFactoryResolver,  
+  ViewChild,  
+  ElementRef,  
+  ViewContainerRef,} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -14,6 +18,9 @@ import { User } from './_models';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  
+
+
   /*  employees: Observable<Employee[]>;
 
   constructor(private store: Store<AppState>) {
@@ -40,13 +47,14 @@ export class AppComponent {
 
   constructor(
     private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver,
     private authenticationService: AuthenticationService
   ) {
     this.authenticationService.currentUser.subscribe(
       (x) => (this.currentUser = x)
     );
   }
-
+  
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
