@@ -10,6 +10,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HeaderComponent } from './shared/header/header/header.component';
 import { environment } from '../environments/environment'
 import { appReducer } from './store/app.state';
+import { EffectsModule } from '@ngrx/effects';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -17,6 +19,8 @@ import { appReducer } from './store/app.state';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
+    EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
     //StoreModule.forRoot({employees:employeeReducer}),
     // Instrumentation must be imported after importing StoreModule (config is optional)
