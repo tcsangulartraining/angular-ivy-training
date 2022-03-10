@@ -5,8 +5,9 @@ import { loginStart, loginSuccess } from './auth.actions';
 import { exhaustMap, map, mergeMap} from 'rxjs/operators'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { setLoadingSpinner } from 'src/app/store/shared/shared.actions';
-
+import { setErrorMessage, setLoadingSpinner } from 'src/app/store/shared/shared.actions';
+import { catchError } from 'rxjs/operators'; 
+import { of } from 'rxjs'; 
 
 @Injectable()
 
@@ -20,8 +21,15 @@ export class AuthEffects{
             .pipe(
                 map((data)=>{
                     this.store.dispatch(setLoadingSpinner({status:false}));
+                    this.store.dispatch(setErrorMessage({message:''}));
                     const user = this.authService.formatUser(data);
                     return loginSuccess({user});
+                }),
+                catchError(errResp=>{
+                    console.log(errResp.error.error.message);
+                    const errorMessage = this.authService.getErrorMessage(errResp.error.error.message)
+                    this.store.dispatch(setLoadingSpinner({status:false}));
+                    return of(setErrorMessage({message:errorMessage}));
                 })
             ))
         )
