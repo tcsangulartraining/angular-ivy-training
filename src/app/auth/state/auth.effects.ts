@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginStart, loginSuccess } from './auth.actions';
+import { loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
 import { exhaustMap, map, mergeMap, tap} from 'rxjs/operators'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
@@ -30,7 +30,6 @@ export class AuthEffects{
                     return loginSuccess({user});
                 }),
                 catchError(errResp=>{
-                    console.log(errResp.error.error.message);
                     const errorMessage = this.authService.getErrorMessage(errResp.error.error.message)
                     this.store.dispatch(setLoadingSpinner({status:false}));
                     return of(setErrorMessage({message:errorMessage}));
@@ -40,13 +39,34 @@ export class AuthEffects{
     )
 
     loginRedirect$ = createEffect(()=>{
-        console.log("login redirect called")
         return this.actions$.pipe(
-            ofType(loginSuccess),
+            ofType(...[loginSuccess, signupSuccess]),
             tap((action)=>{
+                this.store.dispatch(setErrorMessage({message:''}))
                 this.router.navigate(['/'])
             })
         )
-    }, {dispatch:false})
+        }, {dispatch:false}
+    )
         
+    signUp$ = createEffect(()=>
+        this.actions$.pipe(
+            ofType(signupStart),
+            mergeMap((action: { email: string; password: string; })=>this.authService.signUp(action.email, action.password)
+            .pipe(
+                map((data)=>{
+                    this.store.dispatch(setLoadingSpinner({status:false}));
+                    this.store.dispatch(setErrorMessage({message:''}));
+                    const user = this.authService.formatUser(data);
+                    return signupSuccess({user});
+                }),
+                catchError(errResp=>{
+                    const errorMessage = this.authService.getErrorMessage(errResp.error.error.message)
+                    this.store.dispatch(setLoadingSpinner({status:false}));
+                    return of(setErrorMessage({message:errorMessage}));
+                })
+            )
+            )
+        )
+    )
 }
