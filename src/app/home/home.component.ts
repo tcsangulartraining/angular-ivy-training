@@ -57,6 +57,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
   add(): void {
+    const viewContainerRef = this.container;
+    viewContainerRef.clear();
+
     // create the component factory
     const dynamicComponentFactory =
       this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
