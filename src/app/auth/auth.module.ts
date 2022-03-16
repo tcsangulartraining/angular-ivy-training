@@ -18,7 +18,7 @@ const routes: Routes=[
     imports:[
         CommonModule, 
         FormsModule,ReactiveFormsModule,
-        EffectsModule.forFeature([AuthEffects]),
+        EffectsModule.forFeature(),
         RouterModule.forChild(routes)
     ],
     declarations:[LoginComponent, SignupComponent]

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
+import { autoLogin, autoLogout, loginStart, loginSuccess, signupStart, signupSuccess } from './auth.actions';
 import { exhaustMap, map, mergeMap, tap} from 'rxjs/operators'
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 @Injectable()
 
 export class AuthEffects{
+    timeoutInterval:any;
     constructor(private actions$:Actions, 
         private authService:AuthService, 
         private store:Store<AppState>,
@@ -27,6 +28,7 @@ export class AuthEffects{
                     this.store.dispatch(setLoadingSpinner({status:false}));
                     this.store.dispatch(setErrorMessage({message:''}));
                     const user = this.authService.formatUser(data);
+                    this.authService.setUserInLocalStorage(user)
                     return loginSuccess({user});
                 }),
                 catchError(errResp=>{
@@ -58,6 +60,7 @@ export class AuthEffects{
                     this.store.dispatch(setLoadingSpinner({status:false}));
                     this.store.dispatch(setErrorMessage({message:''}));
                     const user = this.authService.formatUser(data);
+                    this.authService.setUserInLocalStorage(user)
                     return signupSuccess({user});
                 }),
                 catchError(errResp=>{
@@ -69,4 +72,22 @@ export class AuthEffects{
             )
         )
     )
+    autoLogin$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(autoLogin),
+            mergeMap((action)=>{
+                const user = this.authService.getUserInLocalStorage();
+                return of(loginSuccess({user}));
+            })
+        )
+    })
+    logout$ = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(autoLogout),
+            map((action)=>{
+                this.authService.logout();
+                this.router.navigate(['auth'])
+            })
+        )
+    }, {dispatch:false})
 }
