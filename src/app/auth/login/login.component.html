@@ -3,21 +3,21 @@
         <h3>Login</h3>
         <hr/>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
+            <div class="mb-2">
                 <label>Email</label>
                 <input type="text" class="form-control" formControlName="email">
             </div>
-            <div *ngIf="loginForm.get('email').touched && !loginForm.get('email').valid">
+            <div *ngIf="loginForm.get('email').touched && !loginForm.get('email').valid" class="text-danger mb-2">
                 <div *ngIf="loginForm.get('email').errors.required">
                     Email is required
                 </div>
                 <div *ngIf="loginForm.get('email').errors.email">Invalid Email</div>
             </div>
-            <div class="mb-3">
+            <div class="mb-2">
                 <label>Password</label>
                 <input type="password" class="form-control" formControlName="password">
             </div>
-            <div *ngIf="loginForm.get('password').touched && !loginForm.get('password').valid">
+            <div *ngIf="loginForm.get('password').touched && !loginForm.get('password').valid" class="text-danger mb-2">
                 <div *ngIf="loginForm.get('password').errors.required">
                     Password is required
                 </div>
