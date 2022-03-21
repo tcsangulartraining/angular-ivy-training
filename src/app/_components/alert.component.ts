@@ -20,11 +20,15 @@ export class AlertComponent implements OnInit, OnDestroy {
           message.cssClass = 'alert alert-danger';
           break;
       }
-
+      this.hideDiv()
       this.message = message;
     });
   }
-
+hideDiv(){
+  setTimeout(()=>{
+    this.message = false;
+  },3000)
+}
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
