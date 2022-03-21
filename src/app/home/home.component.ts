@@ -15,6 +15,7 @@ import { UserService, AuthenticationService } from '../_services';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { DynamicComponent } from '../dynamic/dynamic.component';
+import { NgForm } from '@angular/forms';
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('container', { read: ViewContainerRef })
@@ -42,8 +43,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loadAllUsers();
   }
 
-  onSubmit() {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model, null, 4));
+  onSubmit(form: NgForm) {
+    alert('Added Employee details successfully');
     this.store.dispatch({
       type: 'ADD_EMPLOYEE',
       payload: <Employee>{
@@ -52,6 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         email: this.model.email,
       },
     });
+    form.resetForm();
     if (this.employees != undefined) {
       this.add();
     }
